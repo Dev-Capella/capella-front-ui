@@ -4,12 +4,14 @@
 /node_modules
 /.pnp
 .pnp.js
+/.vscode/
 
 # testing
 /coverage
 
 # next.js
 /.next/
+
 /out/
 
 # production
