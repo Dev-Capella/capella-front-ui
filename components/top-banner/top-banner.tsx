@@ -2,10 +2,15 @@ import React from 'react'
 
 function TopBanner() {
   return (
-    <div className='text-center bg-black text-white'>
-        Top Banner
+    <div className="flex items-center bg-black text-white h-12">
+      <div className="flex justify-between items-center w-full px-16">
+        <div>Sign Up for 15% off your first order</div>
+        <div className="">
+          <p>TR</p>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
 export default TopBanner
