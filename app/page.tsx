@@ -1,9 +1,13 @@
 import Image from "next/image";
 import navb from "../public/assets/images/aa.jpeg";
+import Banner from '@/components/banner/banner';
 export default function Home() {
   return (
-    <div className="flex justify-center items-center bg-indigo-500">
-      <div className="max-w-[1200px] flex justify-between items-center w-full relative">
+    <div className="flex justify-center items-center">
+      <div className="w-4/6 max-2xl:w-5/6 max-lg:w-full">
+        <Banner />
+      </div>
+      {/* <div className="max-w-[1200px] flex justify-between items-center w-full relative">
         <div className="h-[450px]  w-full px-16 flex justify-center items-center">
           <div className="bg-white  rounded-md h-5/6 w-full shadow-lg black flex justify-center items-center">
             <div className="flex justify-start items-start flex-col w-[35%] h-full px-9 py-24">
@@ -28,7 +32,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

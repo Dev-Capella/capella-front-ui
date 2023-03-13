@@ -1,0 +1,5 @@
+.slick-dots li {
+    width: 50px !important;
+    height: 50px;
+    display: inline-block;
+}

@@ -24,7 +24,7 @@ function TopBar() {
             <CiHeart className="text-3xl font-bold text-gray-700 " />
             <p className="text-md font-medium text-gray-500 ">Favorilerim</p>
           </div>
-          <div className="flex items-center  cursor-pointer">
+          <div className="flex items-center  cursor-pointer"> 
             <BsPerson className="text-2xl font-bold text-gray-700 ml-5" />
             <p className="text-md font-medium text-gray-500 ">Hesabım</p>
           </div>

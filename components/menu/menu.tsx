@@ -5,10 +5,10 @@ function Menu() {
   const [activeItem, setActiveItem] = useState("");
   function handleMouseOver(event: any) {
     setActiveItem(event.target.innerText);
-    console.log(event.target.innerText);
+    console.log(event.target.innerText);  
   }
   return (
-    <div className="flex justify-center items-center h-16 border-t-4 border-violet-600 bg-[#F5F5F5] ">
+    <div className=" flex justify-center items-center h-16 border-t-4 border-violet-600 bg-[#F5F5F5] ">
       <div className="max-w-[1200px] flex justify-between items-center w-full relative">
         <ul className="flex justify-center items-center w-full text-sm font-medium text-slate-600 ">
           <li
