@@ -1,0 +1,262 @@
+.p-carousel-item div {
+  border: none !important;
+}
+
+.p-carousel-content {
+  position: relative !important;
+}
+
+.p-carousel:hover .p-carousel-content .p-carousel-prev {
+  display: flex;
+  background-color: #fff !important;
+  position: absolute !important;
+  z-index: 999 !important;
+  left: 0 !important;
+  height: 48px !important;
+  width: 48px !important;
+  margin: 25px !important;
+  opacity: 1;
+  transition: all 0.2s linear;
+}
+
+.p-carousel:hover .p-carousel-content .p-carousel-next {
+  display: flex;
+  background-color: #fff !important;
+  position: absolute !important;
+  z-index: 999 !important;
+  right: 0 !important;
+  height: 48px !important;
+  width: 48px !important;
+  margin: 25px !important;
+  opacity: 1;
+  transition: all 0.2s linear;
+}
+
+.p-carousel .p-carousel-content .p-carousel-prev {
+  background-color: #fff !important;
+  position: absolute !important;
+  z-index: 999 !important;
+  right: 0 !important;
+  height: 48px !important;
+  width: 48px !important;
+  margin: 15px !important;
+  opacity: 0;
+}
+
+.p-carousel .p-carousel-content .p-carousel-next {
+  background-color: #fff !important;
+  position: absolute !important;
+  z-index: 999 !important;
+  right: 0 !important;
+  height: 48px !important;
+  width: 48px !important;
+  margin: 15px !important;
+  opacity: 0;
+}
+
+.p-carousel .p-carousel-content .p-carousel-indicators {
+  position: absolute;
+  z-index: 999 !important;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.p-carousel .p-carousel-content .p-carousel-indicators button {
+  background: #c9c9c9 !important;
+  border-radius: 7px !important;
+  text-indent: -9999px !important;
+  height: 10px !important;
+  width: 10px !important;
+  margin-top: -28px;
+}
+
+.p-carousel .p-carousel-content .p-carousel-indicators .p-highlight button {
+  background: #1f1f1f !important;
+}
+
+.main-banner {
+  position: relative;
+}
+
+.banner-info {
+  position: absolute;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 420px;
+  top: 50%;
+  transform: translate(0, -50%);
+  right: 40px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 1px 10px 0 rgba(31, 31, 31, 0.06),
+    0 4px 5px 0 rgba(31, 31, 31, 0.08), 0 2px 4px -1px rgba(31, 31, 31, 0.06);
+}
+
+.desc {
+  font-size: 32px;
+  overflow: hidden;
+  max-height: 80px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.18px;
+  color: #1f1f1f;
+  margin: 0;
+}
+
+.title {
+  font-size: 22px;
+  overflow: hidden;
+  max-height: 52px;
+  line-height: 1.18;
+  letter-spacing: -0.12px;
+  color: #1f1f1f;
+  margin: 0;
+}
+
+.card-banner-container {
+  display: block;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.banner-info-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.card-banner-left-text {
+  width: 50%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: left;
+  font-size: 14px;
+}
+
+.card-banner-right-text {
+  display: none;
+  justify-content: flex-end;
+  align-items: center;
+  width: 50%;
+  text-align: right;
+  font-size: 14px;
+}
+
+.card-summary {
+  background: #1b1b1b;
+  color: #fff;
+  height: 38px;
+  line-height: 38px;
+  padding: 0 17px;
+  font-size: 14px;
+  border-top: 0;
+  border-bottom: 0;
+  display: flex;
+  overflow: hidden;
+  transition: background 300ms ease;
+}
+
+.card-banner-container:hover .card-banner-right-text {
+  display: flex;
+}
+
+.card-banner-container:hover .card-summary {
+  background: #f68428;
+  transition: background 300ms ease;
+}
+
+.card-banner-image-container {
+  overflow: hidden;
+  box-sizing: border-box;
+  display: block;
+  position: relative;
+  border-radius: 6px 6px 0 0;
+}
+
+.card-banner-image {
+  width: 100%;
+  display: block;
+  position: relative;
+  transition: transform 1s ease;
+}
+
+.card-banner-image:hover {
+  transform: scale(1.015);
+}
+
+@media screen and (max-width: 768px) {
+  .banner-info {
+    position: absolute;
+    width: calc(50% - 22.5px);
+    display: block;
+    height: 5rem;
+    border-radius: 6px;
+    background-color: #fff;
+    padding: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .title {
+    font-size: clamp(10px, 3.2vw, 12px);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.07px;
+    text-align: center;
+    color: #1f1f1f;
+    max-height: 44px;
+  }
+
+  .desc {
+    font-size: clamp(15px, 4.5vw, 17px);
+    font-weight: 700;
+    line-height: 1.29;
+    letter-spacing: -0.09px;
+    text-align: center;
+    color: #1f1f1f;
+    max-height: 44px;
+    margin-top: 4px;
+  }
+
+  .p-carousel .p-carousel-content .p-carousel-prev {
+    display: none;
+  }
+
+  .p-carousel .p-carousel-content .p-carousel-next {
+    display: none;
+  }
+
+  .p-carousel .p-carousel-content .p-carousel-indicators {
+    display: none;
+  }
+
+  .p-carousel:hover .p-carousel-content .p-carousel-prev {
+    display: none;
+  }
+
+  .p-carousel:hover .p-carousel-content .p-carousel-next {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1340px) {
+  .card-banner-right-text,
+  .card-banner-left-text {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 1208px) {
+  .card-banner-right-text,
+  .card-banner-left-text {
+    font-size: 11px;
+  }
+}

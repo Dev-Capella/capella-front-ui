@@ -1,0 +1,8 @@
+.p-selectbutton {
+  display: flex !important;
+  width: 100% !important;
+}
+
+.p-selectbutton .p-button {
+  width: 100% !important;
+}
