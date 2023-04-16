@@ -2,20 +2,20 @@ import React, { useState } from "react";
 import { Button } from "primereact/button";
 import { useForm, Controller } from "react-hook-form";
 import authService from "../../../Manager/Service/authService";
+import authUtils from "../../../Manager/Utils/authUtils.js";
 import { classNames } from "primereact/utils";
 import ResponseStatus from "../../../Manager/ResponseStatus";
 import { InputText } from "primereact/inputtext";
+import { useNavigate } from "react-router-dom";
+
 const defaultValues = {
-  mail: "",
+  email: "",
   password: "",
 };
 
 function Login() {
   const [isLoading, setIsLoading] = useState(false);
-  const defaultValues = {
-    mail: "",
-    password: "",
-  };
+  const navigate = useNavigate();
   const {
     control,
     formState: { errors },
@@ -28,7 +28,9 @@ function Login() {
       .loginUser(data)
       .then((result) => {
         if (result.status === ResponseStatus.SUCCESS) {
+          authUtils.handleLogin(result.data);
           setIsLoading(false);
+          navigate("/")
         }
       })
       .catch((error) => {
@@ -45,21 +47,21 @@ function Login() {
     <div>
       <form className="p-fluid grid formgrid">
         <div className="w-full">
-          {getFormErrorMessage("mail")}
+          {getFormErrorMessage("email")}
           <Controller
-            name="mail"
+            name="email"
             control={control}
-            rules={{ required: "E-mail alanı zorunludur." }}
+            rules={{ required: "Email alanı zorunludur." }}
             render={({ field, fieldState }) => (
               <>
                 <InputText
-                  placeholder="E-posta adresi"
+                  placeholder="Email adresi"
                   style={{
                     borderRadius: "8px",
                     backgroundColor: "rgb(245, 245, 245)",
                     border: "2px solid rgb(238, 238, 238)",
                   }}
-                  id={field.mail}
+                  id={field.email}
                   {...field}
                   autoFocus
                   className={classNames({

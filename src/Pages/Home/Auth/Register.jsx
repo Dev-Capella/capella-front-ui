@@ -41,7 +41,7 @@ function Register() {
       .then((result) => {
         if (result.status === ResponseStatus.SUCCESS) {
           setIsLoading(false);
-          navigate("/")
+          navigate("/login")
         }
       })
       .catch((error) => {
@@ -159,6 +159,7 @@ function Register() {
               render={({ field, fieldState }) => (
                 <>
                   <InputText
+                    type="password"
                     placeholder="Şifre"
                     style={{
                       borderRadius: "8px",

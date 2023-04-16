@@ -1,9 +1,10 @@
 import axiosInstance from "../../Middleware/jwtInterceptor";
 
 const loginUser = async (user) => {
-  var { data } = await axiosInstance.post("api/login", { ...user });
+  var { data } = await axiosInstance.post("login", { ...user });
   return data;
 };
+
 const createregisterrequest = async (data) => {
   var { data } = await axiosInstance.post("createregisterrequest", { ...data });
   return data;
