@@ -6,7 +6,7 @@ import { classNames } from "primereact/utils";
 import ResponseStatus from "../../../Manager/ResponseStatus";
 import { InputText } from "primereact/inputtext";
 import { Checkbox } from "primereact/checkbox";
-import { useParams } from "react-router";
+import { useParams,useNavigate } from "react-router";
 import { Messages } from "primereact/messages";
 import { Message } from "primereact/message";
 const defaultValues = {
@@ -19,9 +19,12 @@ const defaultValues = {
 function Register() {
   const [isLoading, setIsLoading] = useState(false);
   const [isVerifiedToken, setIsVerifiedToken] = useState(false);
+  const msgs1 = useRef(null);
+  const params = useParams();
+  const navigate = useNavigate();
   const defaultValues = {
-    name: "",
-    lastname: "",
+    firstName: "",
+    lastName: "",
     password: "",
     kvkk: false,
   };
@@ -34,10 +37,11 @@ function Register() {
   const onSubmit = (data) => {
     setIsLoading(true);
     authService
-      .loginUser(data)
+      .registerUser(data,params.userId)
       .then((result) => {
         if (result.status === ResponseStatus.SUCCESS) {
           setIsLoading(false);
+          navigate("/")
         }
       })
       .catch((error) => {
@@ -51,7 +55,6 @@ function Register() {
       )
     );
   };
-  const params = useParams();
   useLayoutEffect(() => {
     const verifyData = {
       emailVerificationToken: params.token,
@@ -63,13 +66,13 @@ function Register() {
       .then((result) => {
         if (result.status === ResponseStatus.SUCCESS) {
           setIsLoading(false);
+          setIsVerifiedToken(result.data)
         }
       })
       .catch((error) => {
         setIsLoading(false);
       });
   }, []);
-  const msgs1 = useRef(null);
   useEffect(() => {
     if (!isVerifiedToken) {
       msgs1.current.show([
@@ -95,7 +98,7 @@ function Register() {
             <div className="flex gap-5">
               <div className="flex-1 mb-4 text-left">
                 <Controller
-                  name="name"
+                  name="firstName"
                   control={control}
                   rules={{ required: "Ad alanı zorunludur." }}
                   render={({ field, fieldState }) => (
@@ -107,7 +110,7 @@ function Register() {
                           backgroundColor: "rgb(245, 245, 245)",
                           border: "2px solid rgb(238, 238, 238)",
                         }}
-                        id={field.name}
+                        id={field.firstName}
                         {...field}
                         autoFocus
                         className={classNames({
@@ -118,11 +121,11 @@ function Register() {
                     </>
                   )}
                 />
-                {getFormErrorMessage("name")}
+                {getFormErrorMessage("firstName")}
               </div>
               <div className="flex-1 mb-4 text-left">
                 <Controller
-                  name="lastname"
+                  name="lastName"
                   control={control}
                   rules={{ required: "Soyad alanı zorunludur." }}
                   render={({ field, fieldState }) => (
@@ -134,7 +137,7 @@ function Register() {
                           backgroundColor: "rgb(245, 245, 245)",
                           border: "2px solid rgb(238, 238, 238)",
                         }}
-                        id={field.lastname}
+                        id={field.lastName}
                         {...field}
                         autoFocus
                         className={classNames({
@@ -145,7 +148,7 @@ function Register() {
                     </>
                   )}
                 />
-                {getFormErrorMessage("lastname")}
+                {getFormErrorMessage("lastName")}
               </div>
             </div>
 
@@ -230,7 +233,7 @@ function Register() {
         </div>
       ) : (
         <div className="col-12 md:col-12 w-full">
-          <Messages ref={msgs1} content={<div>s</div>} />
+          <Messages ref={msgs1} />
           <Button
             label="Anasayfa"
             className="w-full p-3 mt-3"

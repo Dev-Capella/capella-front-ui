@@ -13,10 +13,16 @@ const verifyEmail = async (data) => {
   return data;
 };
 
+const registerUser = async (user,userId) => {
+  var { data } = await axiosInstance.post(`register/${userId}`, { ...user });
+  return data;
+};
+
 const exportFunction = {
   loginUser,
   createregisterrequest,
   verifyEmail,
+  registerUser
 };
 
 export default exportFunction;

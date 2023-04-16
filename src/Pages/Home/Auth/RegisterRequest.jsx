@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useState,useRef,useEffect } from "react";
 import { Button } from "primereact/button";
 import { useForm, Controller } from "react-hook-form";
 import authService from "../../../Manager/Service/authService";
 import { classNames } from "primereact/utils";
 import ResponseStatus from "../../../Manager/ResponseStatus";
 import { InputText } from "primereact/inputtext";
-
+import { Messages } from "primereact/messages";
+import { Message } from "primereact/message";
 const defaultValues = {
   email: "",
 };
 
 function RegisterRequest() {
+  const msgs1 = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isEmailSend, setIsEmailSend] = useState(false);
   const defaultValues = {
     email: "",
   };
@@ -21,18 +24,32 @@ function RegisterRequest() {
     handleSubmit,
   } = useForm({ defaultValues });
 
+  useEffect(() => {
+    if (isEmailSend) {
+      msgs1.current.show([
+        {
+          sticky: true,
+          severity: "success",
+          detail: "Doğrulama maili gönderildi.Lütfen gelen kutunuzu veya spam(önemsiz) klasörünü kontrol edin.",
+          closable: false,
+        },
+      ]);
+    }
+  }, [isEmailSend]);
+
   const onSubmit = (data) => {
     setIsLoading(true);
     authService
       .createregisterrequest(data)
       .then((result) => {
-        console.log(result);
         if (result.status === ResponseStatus.SUCCESS) {
           setIsLoading(false);
+          setIsEmailSend(true);
         }
       })
       .catch((error) => {
         setIsLoading(false);
+        setIsEmailSend(false);
       });
   };
   const getFormErrorMessage = (name) => {
@@ -43,6 +60,13 @@ function RegisterRequest() {
   return (
     <div className="w-full">
       <form className="p-fluid grid formgrid">
+        {isEmailSend ? ( 
+        <div className="col-12 md:col-12 w-full">
+          <Messages ref={msgs1} />
+        </div>
+        ) : null
+        }
+     
         <div className="w-full">
           {getFormErrorMessage("email")}
           <Controller

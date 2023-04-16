@@ -20,7 +20,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.response.use(
   function (response) {
-    return response.data;
+    return response;
   },
   function (error) {
     /*const originalRequest = error.config
