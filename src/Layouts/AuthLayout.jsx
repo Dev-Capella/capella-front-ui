@@ -1,19 +1,27 @@
-import React, { useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import { SelectButton } from "primereact/selectbutton";
 import "./css/AuthLayout.css";
 function AuthLayout() {
-  const options = ["Giriş Yap", "Kayıt Ol"];
-  const [value, setValue] = useState(options[0]);
+  const options = [
+    { path: "/login", name: "Giriş Yap" },
+    { path: "/register-request", name: "Kayıt Ol" },
+  ];
+  const [value, setValue] = useState();
   const navigate = useNavigate();
+  const location = useLocation();
+
   const navigateHandler = (e) => {
-    setValue(e);
-    if (e === "Giriş Yap") {
-      navigate("/login");
-    } else {
-      navigate("/register");
-    }
+    navigate(e);
   };
+  useEffect(() => {
+    if (
+      location.pathname === "/register-request" ||
+      location.pathname === "/login"
+    ) {
+      setValue(location.pathname);
+    }
+  }, [location]);
   return (
     <>
       <div className="w-full m-auto lg:w-8" style={{ minHeight: "60rem" }}>
@@ -32,8 +40,10 @@ function AuthLayout() {
             <div className="flex justify-content-center mb-5">
               <SelectButton
                 value={value}
+                optionValue="path"
                 onChange={(e) => navigateHandler(e.value)}
                 options={options}
+                optionLabel="name"
               />
             </div>
             <Outlet />

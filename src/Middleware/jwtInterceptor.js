@@ -1,9 +1,9 @@
-import axios from 'axios'
+import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: `https://localhost:7083/`,
+  baseURL: `https://localhost:7066/`,
   withCredentials: true,
-})
+});
 
 // axiosInstance.interceptors.request.use(
 //   function (request) {
@@ -20,7 +20,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.response.use(
   function (response) {
-    return response.data
+    return response.data;
   },
   function (error) {
     /*const originalRequest = error.config
@@ -49,8 +49,8 @@ axiosInstance.interceptors.response.use(
           }
         })
     } */
-    return Promise.reject(error)
-  },
-)
+    return Promise.reject(error);
+  }
+);
 
-export default axiosInstance
+export default axiosInstance;

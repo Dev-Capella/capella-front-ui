@@ -5,16 +5,15 @@ import authService from "../../../Manager/Service/authService";
 import { classNames } from "primereact/utils";
 import ResponseStatus from "../../../Manager/ResponseStatus";
 import { InputText } from "primereact/inputtext";
+
 const defaultValues = {
-  mail: "",
-  password: "",
+  email: "",
 };
 
-function Login() {
+function RegisterRequest() {
   const [isLoading, setIsLoading] = useState(false);
   const defaultValues = {
-    mail: "",
-    password: "",
+    email: "",
   };
   const {
     control,
@@ -25,8 +24,9 @@ function Login() {
   const onSubmit = (data) => {
     setIsLoading(true);
     authService
-      .loginUser(data)
+      .createregisterrequest(data)
       .then((result) => {
+        console.log(result);
         if (result.status === ResponseStatus.SUCCESS) {
           setIsLoading(false);
         }
@@ -40,14 +40,13 @@ function Login() {
       errors[name] && <small className="p-error">{errors[name].message}</small>
     );
   };
-
   return (
-    <div>
+    <div className="w-full">
       <form className="p-fluid grid formgrid">
         <div className="w-full">
-          {getFormErrorMessage("mail")}
+          {getFormErrorMessage("email")}
           <Controller
-            name="mail"
+            name="email"
             control={control}
             rules={{ required: "E-mail alanı zorunludur." }}
             render={({ field, fieldState }) => (
@@ -59,36 +58,7 @@ function Login() {
                     backgroundColor: "rgb(245, 245, 245)",
                     border: "2px solid rgb(238, 238, 238)",
                   }}
-                  id={field.mail}
-                  {...field}
-                  autoFocus
-                  className={classNames({
-                    "appearance-none p-3 w-full outline-none text-base mb-4 border-1":
-                      fieldState.invalid,
-                  })}
-                />
-              </>
-            )}
-          />
-        </div>
-
-        <div className="mt-2 w-full">
-          {getFormErrorMessage("password")}
-          <Controller
-            name="password"
-            control={control}
-            rules={{ required: "Lütfen şifreinizi giriniz." }}
-            render={({ field, fieldState }) => (
-              <>
-                <InputText
-                  type="password"
-                  placeholder="Şifre"
-                  style={{
-                    borderRadius: "8px",
-                    backgroundColor: "rgb(245, 245, 245)",
-                    border: "2px solid rgb(238, 238, 238)",
-                  }}
-                  id={field.password}
+                  id={field.email}
                   {...field}
                   autoFocus
                   className={classNames({
@@ -102,18 +72,26 @@ function Login() {
         </div>
 
         <Button
-          label="Giriş Yap"
+          label="Kayıt Ol"
           className="w-full p-3 mt-3"
           style={{ borderRadius: "8px" }}
           loading={isLoading}
           onClick={handleSubmit((data) => onSubmit(data))}
         />
-        <a className="cursor-pointer font-medium block text-right mt-3">
-          Şifremi Unuttum
-        </a>
+        <p className="w-full text-left text-xs line-height-2">
+          Kişisel verileriniz,{" "}
+          <span className="cursor-pointer font-medium"> Aydınlatma Metni </span>{" "}
+          kapsamında işlenmektedir. “Üye ol” veya “Sosyal Hesap” butonlarından
+          birine basarak{" "}
+          <span className="cursor-pointer font-medium"> Üyelik Sözleşmesi</span>
+          ’ni, <span className="cursor-pointer font-medium">Rıza Metni</span>
+          ’ni,{" "}
+          <span className="cursor-pointer font-medium">Çerez Politikası</span>
+          ’nı okuduğunuzu ve kabul ettiğinizi onaylıyorsunuz.
+        </p>
       </form>
     </div>
   );
 }
 
-export default Login;
+export default RegisterRequest;

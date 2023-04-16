@@ -5,6 +5,8 @@ import HomePage from "../Pages/Home/Home";
 import Login from "../Pages/Home/Auth/Login";
 import Register from "../Pages/Home/Auth/Register";
 import AuthLayout from "../Layouts/AuthLayout";
+import RegisterRequest from "../Pages/Home/Auth/RegisterRequest";
+import RegisterLayout from "../Layouts/RegisterLayout";
 
 const AppRoutes = () => (
   <div>
@@ -15,8 +17,11 @@ const AppRoutes = () => (
         </Route>
       </Route>
       <Route path="" element={<AuthLayout />}>
-        <Route path="/register" element={<Register />} />
+        <Route path="/register-request" element={<RegisterRequest />} />
         <Route path="/login" element={<Login />} />
+      </Route>
+      <Route path="" element={<RegisterLayout />}>
+        <Route path="/:userId/:token" element={<Register />} />
       </Route>
     </Routes>
   </div>
