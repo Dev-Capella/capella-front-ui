@@ -36,7 +36,7 @@ function Register() {
     setIsLoading(true)
 
     authService
-      .updatePassword(data)
+      .registerUser(data,params.userId)
       .then((result) => {
         if (result.status === ResponseStatus.SUCCESS) {
           setIsLoading(false)
