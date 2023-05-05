@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import ProductCarousel from "../../Components/Banner/Carousel/Carousel";
 import CardBanner from "../../Components/Banner/Card/Card";
 import Widget from "../../Components/Widget/Widget";
+import bannerService from "../../Manager/Service/bannerService";
 
 export default function HomePage() {
+  const [carousel,setCarousel] = useState(null);
+  const [card, setCard] = useState(null);
   const cardBannerArray = [
     {
       imgUrl:
@@ -63,19 +66,31 @@ export default function HomePage() {
         "https://n11scdn.akamaized.net/a1/org/23/01/17/74/00/75/82/25/30/42/53/87/82066922147261756076.png",
     },
   ];
+  useLayoutEffect(() => {
+    fethData();
+  },[])
+  
+  const fethData =async () => {
+    const result = await bannerService.getActiveBanners();
+    console.log(result);
+    let carousel = result?.data.filter((item) => {return item.bannerType === 0})
+    setCarousel(carousel);
+    let card = result?.data.filter((item) => {return item.bannerType === 2})
+    setCard(card);
+  }
   return (
     <div>
-      <ProductCarousel />
+      <ProductCarousel carousel={carousel} />
       <div className="grid">
         <div className="col-12 p-3">
           <Widget widgets={widgets} />
         </div>
       </div>
       <div className="grid">
-        {cardBannerArray.map((banner, index) => {
+        {card?.map((banner, index) => {
           return (
             <div key={index} className="col-12 xl:col-4 lg:col-6 p-3">
-              <CardBanner key={index} banner={banner} />
+              <CardBanner banner={banner}  />
             </div>
           );
         })}
